@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('accueil');
+    return view('accueil', [
+        'links' => Link::all()
+    ]);
 });
 
 // Traite le formulaire
@@ -32,4 +34,12 @@ Route::post('/', function () {
     ]);
 
     return redirect('/');
+});
+
+Route::get('accueil/l/{id}', function ($id) {
+    $url = Link::find($id);
+
+    return view('afficher', [
+        'url' => $url
+    ]);
 });

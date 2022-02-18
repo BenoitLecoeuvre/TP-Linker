@@ -27,6 +27,13 @@
 
         <div>
             <h2>Mes liens:</h2>
+
+            @foreach ($links as $link)
+            <div>
+                <h4>{{ $link->name }} :</h4>
+                <a href="accueil/l/{{ $link->id }}">Voir</a>
+            </div>
+            @endforeach
         </div>
     </main>
 </body>
