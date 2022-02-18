@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Link;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('accueil');
+});
+
+// Traite le formulaire
+Route::post('/', function () {
+    request()->validate([
+        'name' => 'required|min:3|max:10',
+        'url' => 'required|min:3',
+    ]);
+
+    // S'il n'y a pas d'erreurs, on crée la catégorie
+    Link::create([
+        'name' => request('name'),
+        'url' => request('url')
+    ]);
+
+    return redirect('/');
 });
